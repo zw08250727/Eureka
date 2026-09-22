@@ -87,7 +87,7 @@
     view.hidden = false; view.setAttribute("aria-hidden", "false");
     document.querySelectorAll('[data-main-view]').forEach((item) => { if (item !== view) { item.hidden = true; item.setAttribute("aria-hidden", "true"); } });
     document.querySelector("#page-crumb").textContent = "联系人";
-    document.querySelectorAll(".side-sub-item, .nav-item, .side-group-head").forEach((item) => { item.classList.remove("active"); item.removeAttribute("aria-current"); });
+    document.querySelectorAll(".side-sub-item, .nav-item, .side-group-head, .tree-folder-toggle").forEach((item) => { item.classList.remove("active"); item.removeAttribute("aria-current"); });
     nav?.classList.add("active"); nav?.setAttribute("aria-current", "page");
     document.querySelector(".main")?.scrollTo({ top: 0, behavior: "auto" });
     renderCurrent();

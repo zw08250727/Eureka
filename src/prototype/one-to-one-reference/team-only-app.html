@@ -3145,7 +3145,7 @@
     document.addEventListener("click", (event) => { if (!event.target.closest(".space-switcher-wrap")) closeSpaceMenu(); if (!event.target.closest(".user-footer")) closeUserMenu(); });
     const mainViewTitles = { home: "企业AI工作台", knowledge: "知识库", contacts: "联系人", "recycle-bin": "回收站", capabilities: "AI专家· 技能·连接器", recording: "语音录制", "note-detail": "语音内容" };
     const setActiveSidebar = (target) => {
-      $$(".side-sub-item, .nav-item, .side-group-head").forEach((row) => { row.classList.remove("active"); row.removeAttribute("aria-current"); });
+      $$(".side-sub-item, .nav-item, .side-group-head, .tree-folder-toggle").forEach((row) => { row.classList.remove("active"); row.removeAttribute("aria-current"); });
       [$("#recycle-bin-entry"), $("#recording-recycle-entry")].forEach((row) => { row.classList.remove("active"); row.removeAttribute("aria-current"); });
       const activeItem = ["home", "note-detail"].includes(target) ? $("#home-entry") : target === "recording" ? $("#start-recording") : target === "recycle-bin" ? (activeRecycleRepository === "recording" ? $("#recording-recycle-entry") : $("#recycle-bin-entry")) : target === "contacts" ? $("[data-contacts-entry]") : target === "knowledge" ? null : $("#capability-entry");
       if (activeItem) { activeItem.classList.add("active"); activeItem.setAttribute("aria-current", "page"); }
@@ -4204,7 +4204,7 @@
   </script>
   <script src="assets/team-workspace.js?v=enterprise-cleanup"></script>
   <script src="assets/contacts-model.js?v=contacts-v14"></script>
-  <script src="assets/contacts-ui.js?v=contacts-v14"></script>
+  <script src="assets/contacts-ui.js?v=contacts-v15"></script>
   <script>
     (() => {
       const root = document.documentElement;
