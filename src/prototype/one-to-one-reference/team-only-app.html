@@ -1195,7 +1195,7 @@
     }
     @media (max-width: 930px) {
       .recording-launcher { grid-template-columns: 1fr 250px; }
-      .home-meeting-toolbar .meeting-source-filter, .home-meeting-table-head > span:nth-child(2), .home-meeting-row > span:nth-child(2), .home-meeting-table-head > span:nth-child(5), .home-meeting-row > span:nth-child(5) { display: none; }
+      .home-meeting-toolbar .meeting-source-filter, .home-meeting-table-head > span:nth-child(3), .home-meeting-row > span:nth-child(3), .home-meeting-table-head > span:nth-child(4), .home-meeting-row > span:nth-child(4), .home-meeting-table-head > span:nth-child(5), .home-meeting-row > span:nth-child(5), .home-meeting-table-head > span:nth-child(6), .home-meeting-row > span:nth-child(6) { display: none; }
       .home-meeting-table-head, .home-meeting-row { grid-template-columns: minmax(240px, 1fr) 72px 76px 78px; }
     }
     @media (max-width: 760px) {
@@ -1209,7 +1209,7 @@
       .meeting-search { flex: 1; }
       .home-meeting-table-head { display: none; }
       .home-meeting-table .home-meeting-row { grid-template-columns: minmax(0, 1fr) auto; padding: 12px 16px; }
-      .home-meeting-row > span:nth-child(2), .home-meeting-row > span:nth-child(3), .home-meeting-row > span:nth-child(4), .home-meeting-row > span:nth-child(5) { display: none; }
+      .home-meeting-row > span:nth-child(3), .home-meeting-row > span:nth-child(4), .home-meeting-row > span:nth-child(5), .home-meeting-row > span:nth-child(6) { display: none; }
     }
     @keyframes bridgeFlow { 0% { opacity: 0; transform: translateX(0) scale(.75); } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; transform: translateX(52px) scale(1); } }
     @media (max-width: 1100px) {
@@ -2416,9 +2416,9 @@
     .meeting-table-scroll .home-meeting-row,
     .meeting-agent-grid.agent-open .meeting-table-scroll .home-meeting-table-head,
     .meeting-agent-grid.agent-open .meeting-table-scroll .home-meeting-row {
-      min-width: 1120px;
+      min-width: 1240px;
       gap: 12px;
-      grid-template-columns: minmax(250px, 1.6fr) 72px 82px 78px 72px 78px 116px 116px 112px;
+      grid-template-columns: 40px minmax(250px, 1.6fr) 86px 90px 90px 76px 84px 88px 126px 126px 72px;
     }
     .meeting-table-scroll .home-meeting-table-head { padding-right: 18px; padding-left: 18px; }
     .meeting-table-scroll .home-meeting-table .home-meeting-row { padding-right: 18px; padding-left: 18px; }
@@ -2432,6 +2432,9 @@
     .meeting-table-scroll .home-meeting-title strong { line-height: 18px; white-space: nowrap; }
     .meeting-table-scroll .home-meeting-title small { display: none; }
     .meeting-table-scroll .home-meeting-status { display: inline-flex; }
+    .meeting-select-cell { display: inline-flex !important; width: 28px; align-items: center; justify-content: center; }
+    .meeting-select-cell input { width: 18px; height: 18px; margin: 0; accent-color: #2563eb; cursor: pointer; }
+    .meeting-creator { overflow: hidden; color: #4e5a6c; text-overflow: ellipsis; white-space: nowrap; }
     .meeting-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 5px; }
     .meeting-row-actions button { display: inline-flex; height: 28px; align-items: center; justify-content: center; padding: 0 7px; border: 0; border-radius: 6px; color: #526276; background: transparent; cursor: pointer; font: 9px var(--font); }
     .meeting-row-actions button:hover, .meeting-row-actions button:focus-visible { color: #285fc0; background: #edf3ff; outline: none; }
@@ -2826,7 +2829,7 @@
             <div class="home-meeting-toolbar" id="thought-toolbar" hidden><label class="meeting-search"><svg class="icon"><use href="#ico-search"/></svg><input id="thought-file-search" type="search" placeholder="搜索月度文件" aria-label="搜索闪念月度文件" /></label><label class="meeting-source-filter meeting-date-filter"><span class="sr-only">筛选归档月份</span><svg class="icon date-icon"><use href="#ico-clock"/></svg><select id="thought-month-select" aria-label="筛选归档月份"><option value="all">全部月份</option><option value="2026-09">2026 年 9 月</option><option value="2026-08">2026 年 8 月</option><option value="2026-07">2026 年 7 月</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label></div>
           </div>
           <nav class="enterprise-asset-tabs" id="enterprise-asset-tabs" aria-label="企业会议资产类型" hidden><button class="enterprise-asset-tab active" type="button" data-enterprise-asset="meeting" aria-current="page">会议录音</button><button class="enterprise-asset-tab" type="button" data-enterprise-asset="panorama">AI 全景数据</button></nav>
-          <div class="meeting-table-scroll" id="meeting-table-scroll"><div class="home-meeting-table-head"><span id="meeting-name-column">文件名</span><span>文件大小</span><span id="meeting-source-column">文件来源</span><span>标签</span><span id="meeting-duration-column">录音时长</span><span id="meeting-status-column">文件状态</span><span id="meeting-time-column">录音时间</span><span>更新时间</span><span>操作</span></div>
+          <div class="meeting-table-scroll" id="meeting-table-scroll"><div class="home-meeting-table-head"><span class="meeting-select-cell"><input id="meeting-select-all" type="checkbox" aria-label="选择全部会议" /></span><span id="meeting-name-column">文件名</span><span>文件大小</span><span id="meeting-creator-column">创建人</span><span id="meeting-source-column">文件来源</span><span>标签</span><span id="meeting-duration-column">录音时长</span><span id="meeting-status-column">文件状态</span><span id="meeting-time-column">录音时间</span><span>更新时间</span><span>操作</span></div>
           <div class="home-meeting-table" id="meeting-list">
             <button class="meeting-row home-meeting-row" id="view-panorama" data-view="my" data-date="today" data-source="网页录音"><span class="home-meeting-title"><i><svg class="icon"><use href="#ico-mic"/></svg></i><span><strong>三季度产品复盘会议</strong><small>6 位参与者 · 8 项行动项</small></span></span><span class="home-meeting-size">48.2 MB</span><span>网页录音</span><span class="home-meeting-tag">产品复盘</span><span>47 分钟</span><span class="home-meeting-status ready"><i></i>已总结</span><span class="home-meeting-time">2026-09-02 09:42</span><span class="home-meeting-updated">2026-09-02 10:36</span><em>查看<svg class="icon"><use href="#ico-chevron"/></svg></em></button>
             <button class="meeting-row home-meeting-row" data-view="my" data-date="7" data-source="录音卡" data-meeting="百销产品能力与市场匹配调研" data-meta="昨天 · 58 分钟 · 5 位参与者"><span class="home-meeting-title"><i><svg class="icon"><use href="#ico-mic"/></svg></i><span><strong>百销产品能力与市场匹配调研</strong><small>5 位参与者 · 3 项关键结论</small></span></span><span class="home-meeting-size">56.8 MB</span><span>录音卡</span><span class="home-meeting-tag">市场调研</span><span>58 分钟</span><span class="home-meeting-status ready"><i></i>已总结</span><span class="home-meeting-time">2026-09-01 16:28</span><span class="home-meeting-updated">2026-09-01 18:05</span><em>查看<svg class="icon"><use href="#ico-chevron"/></svg></em></button>
@@ -3968,9 +3971,29 @@
       replacement.setAttribute("tabindex", "0");
       replacement.dataset.meetingId = `meeting-${index + 1}`;
       replacement.innerHTML = row.innerHTML;
+      const selectCell = document.createElement("span");
+      selectCell.className = "meeting-select-cell";
+      selectCell.innerHTML = `<input class="meeting-row-select" type="checkbox" aria-label="选择${$(".home-meeting-title strong", replacement)?.textContent.trim() || "会议"}" />`;
+      replacement.prepend(selectCell);
+      const creatorNames = { "三季度产品复盘会议": "张伟", "百销产品能力与市场匹配调研": "张伟", "百销产品试用开通与标准化讨论": "张伟", "智能工作台工具对接评估": "张伟", "客户成功服务流程访谈": "张伟", "产品复盘行动项确认会": "林晓", "客户需求复盘会": "王宁", "区域销售周会": "李敏", "研发项目推进会": "陈晨" };
+      const title = $(".home-meeting-title strong", replacement)?.textContent.trim() || "会议";
+      const creatorCell = document.createElement("span");
+      creatorCell.className = "meeting-creator";
+      creatorCell.textContent = creatorNames[title] || (replacement.dataset.view === "enterprise" ? "团队成员" : "张伟");
+      $(".home-meeting-size", replacement)?.after(creatorCell);
       const previousAction = $("em", replacement);
       if (previousAction) previousAction.outerHTML = '<span class="meeting-row-actions"><button type="button" data-meeting-action="tag">编辑标签</button><button class="meeting-delete" type="button" data-meeting-action="delete" aria-label="删除会议"><svg class="icon"><use href="#ico-trash"/></svg></button></span>';
       row.replaceWith(replacement);
+    });
+    const meetingSelectAll = $("#meeting-select-all");
+    const meetingRowChecks = () => $$(".meeting-row-select", $("#meeting-list"));
+    meetingSelectAll?.addEventListener("change", () => meetingRowChecks().forEach((checkbox) => { checkbox.checked = meetingSelectAll.checked; }));
+    $("#meeting-list").addEventListener("change", (event) => {
+      if (!event.target.matches(".meeting-row-select") || !meetingSelectAll) return;
+      const checks = meetingRowChecks();
+      const selected = checks.filter((checkbox) => checkbox.checked).length;
+      meetingSelectAll.checked = checks.length > 0 && selected === checks.length;
+      meetingSelectAll.indeterminate = selected > 0 && selected < checks.length;
     });
     $("#meeting-list").addEventListener("click", (event) => {
       const action = event.target.closest("[data-meeting-action]");
@@ -4000,8 +4023,8 @@
       row.click();
     });
     const openNoteDetail = (title = "三季度产品复盘会议", meta = "今天 09:42 · 47 分钟 · 网页录音") => { $("#note-detail-title").textContent = title; $("#note-detail-meta").textContent = `${meta} · 已整理`; showMainView("note-detail", { silent: true }); };
-    $("#view-panorama").addEventListener("click", (event) => { if (!event.target.closest("[data-meeting-action]")) openNoteDetail(); });
-    $$('[data-meeting]').forEach((row) => row.addEventListener("click", (event) => { if (!event.target.closest("[data-meeting-action]")) openNoteDetail(row.dataset.meeting, row.dataset.meta); }));
+    $("#view-panorama").addEventListener("click", (event) => { if (!event.target.closest("[data-meeting-action], .meeting-select-cell")) openNoteDetail(); });
+    $$('[data-meeting]').forEach((row) => row.addEventListener("click", (event) => { if (!event.target.closest("[data-meeting-action], .meeting-select-cell")) openNoteDetail(row.dataset.meeting, row.dataset.meta); }));
     $("#note-detail-back").addEventListener("click", () => showMainView("home", { silent: true }));
     $$('[data-note-detail-item]').forEach((item) => item.addEventListener("click", () => { $$('[data-note-detail-item]').forEach((row) => row.classList.remove("active")); item.classList.add("active"); $("#note-detail-title").textContent = item.dataset.noteDetailItem; $("#note-detail-meta").textContent = `${item.dataset.noteMeta} · 已整理`; }));
     $$('[data-note-tab]').forEach((button) => button.addEventListener("click", () => { $$('[data-note-tab]').forEach((item) => item.classList.toggle("active", item === button)); $$('[data-note-panel]').forEach((panel) => { panel.hidden = panel.dataset.notePanel !== button.dataset.noteTab; }); }));
