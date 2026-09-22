@@ -31,7 +31,7 @@ async function walk(directory) {
 }
 await walk(root);
 const appHtml = await readFile(path.join(root, "one-to-one-reference", "team-only-app.html"), "utf8");
-const requiredMarkers = ["张伟‘s Space", "settings-popover", "AI Summary Language", "Transcription minutes", "data-settings-action=\"toggle-summary\""];
+const requiredMarkers = ["张伟‘s Space", "settings-popover", "AI 摘要语言", "转写时长", "data-settings-action=\"toggle-summary\""];
 for (const marker of requiredMarkers) {
   if (!appHtml.includes(marker)) throw new Error(`Missing Eureka interaction marker: ${marker}`);
 }
