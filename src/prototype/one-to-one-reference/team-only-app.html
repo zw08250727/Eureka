@@ -3144,6 +3144,10 @@
     $("#user-menu").addEventListener("click", (event) => { event.stopPropagation(); const item = event.target.closest("[data-profile-action]"); if (!item) return; const action = item.dataset.profileAction; if (action === "profile") openDrawer("个人中心", '<h4>张伟</h4><div class="drawer-section"><strong>个人资料</strong><p>维护头像、姓名与个人工作信息。</p></div><div class="drawer-section"><strong>我的设备</strong><p>查看已登录的网页端、移动端与桌面端。</p></div>', '<button class="primary-btn" data-toast="个人资料已保存">编辑个人资料</button>'); else if (action === "switch-edition") { closeUserMenu(); $("#edition-gate").hidden = false; return; } else if (action === "download-app") { closeUserMenu(); setAppQrOpen(true); return; } else if (action === "checkin") { item.textContent = "已签到"; item.disabled = true; showToast("签到成功，获得 20 积分"); } else if (action === "logout") showToast("原型演示：退出登录需要二次确认"); else showToast({ upgrade: "正在查看升级方案", points: "正在打开积分明细", "earn-points": "正在打开积分任务", website: "正在打开百智官网", orders: "正在打开我的订单", "agent-workspace": "将按已有逻辑打开 Agent 工作台", intro: "正在打开产品介绍", changelog: "正在打开更新日志", guide: "正在打开新手指南" }[action] || "正在打开个人设置"); closeUserMenu(); });
     document.addEventListener("click", (event) => { if (!event.target.closest(".space-switcher-wrap")) closeSpaceMenu(); if (!event.target.closest(".user-footer")) closeUserMenu(); });
     const mainViewTitles = { home: "企业AI工作台", knowledge: "知识库", contacts: "联系人", "recycle-bin": "回收站", capabilities: "AI专家· 技能·连接器", recording: "语音录制", "note-detail": "语音内容" };
+    // Feature switch: keep the app-data implementation in place while hiding
+    // its current UI surface so it can be restored without rebuilding it.
+    const APP_DATA_HIDDEN = true;
+    document.documentElement.dataset.appDataHidden = String(APP_DATA_HIDDEN);
     const setActiveSidebar = (target) => {
       $$(".side-sub-item, .nav-item, .side-group-head, .tree-folder-toggle").forEach((row) => { row.classList.remove("active"); row.removeAttribute("aria-current"); });
       [$("#recycle-bin-entry"), $("#recording-recycle-entry")].forEach((row) => { row.classList.remove("active"); row.removeAttribute("aria-current"); });
@@ -3152,6 +3156,10 @@
     };
     const showMainView = (target, options = {}) => {
       if (ArtifactUI.guard(() => showMainView(target, options))) return;
+      if (target === "apps" && APP_DATA_HIDDEN) {
+        target = "home";
+        options = { ...options, silent: true };
+      }
       const next = $(`[data-main-view="${target}"]`);
       if (!next) return;
       if (target !== "knowledge") window.setKnowledgeXiaozhiExpanded?.(false);
@@ -4212,6 +4220,16 @@
       root.dataset.teamOnlyReplica = "1";
       const style = document.createElement("style");
       style.textContent = `
+        /* Keep the app-data code and DOM recoverable; hide its current surface. */
+        html[data-app-data-hidden="true"] body .apps-nav,
+        html[data-app-data-hidden="true"] body .sidebar-quick-nav > .apps-nav.team-only-root-entry,
+        html[data-app-data-hidden="true"] body .apps-workspace,
+        html[data-app-data-hidden="true"] body #apps-history-dialog,
+        html[data-app-data-hidden="true"] body #apps-demo-dialog,
+        html[data-app-data-hidden="true"] body .team-app-data-group,
+        html[data-app-data-hidden="true"] body .team-app-data-content,
+        html[data-app-data-hidden="true"] body .team-app-data-head,
+        html[data-app-data-hidden="true"] body .team-app-data-list { display:none !important; }
         .knowledge-group, .capability-hub, #download-top, .home-desktop-guide,
         #knowledge-tool, #skill-tool, #mcp-tool, #site-tool,
         .recording-assistant-knowledge, #recording-assistant-knowledge, #history-shared-download,
