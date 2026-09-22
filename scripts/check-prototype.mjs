@@ -30,4 +30,12 @@ async function walk(directory) {
   }
 }
 await walk(root);
+const appHtml = await readFile(path.join(root, "one-to-one-reference", "team-only-app.html"), "utf8");
+const requiredMarkers = ["张伟‘s Space", "settings-popover", "AI Summary Language", "Transcription minutes", "data-settings-action=\"toggle-summary\""];
+for (const marker of requiredMarkers) {
+  if (!appHtml.includes(marker)) throw new Error(`Missing Eureka interaction marker: ${marker}`);
+}
+if (appHtml.includes('aria-label=\"邀请团队成员加入\"') && !appHtml.includes('document.querySelector(\"#enterprise-invite-card\")?.remove()')) {
+  throw new Error("The invitation card must be removed from the team-only shell");
+}
 console.log(`Prototype check passed: ${scripts} scripts, ${links} local references`);
