@@ -2825,6 +2825,12 @@
               <label class="meeting-source-filter meeting-origin-filter"><span class="sr-only">筛选来源</span><select id="meeting-source-filter" aria-label="筛选内容来源"><option value="all">全部来源</option><option value="网页录音">网页录音</option><option value="录音卡">录音卡</option><option value="移动端同步">移动端同步</option><option value="企业共享">企业共享</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label>
               <label class="meeting-source-filter meeting-date-filter"><span class="sr-only">筛选录音时间</span><svg class="icon date-icon"><use href="#ico-clock"/></svg><select id="meeting-date-filter" aria-label="筛选录音时间"><option value="all">全部时间</option><option value="today">今天</option><option value="7">近 7 天</option><option value="30">近 30 天</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label>
               <button class="recording-recycle-entry" id="recording-recycle-entry" type="button"><svg class="icon"><use href="#ico-trash"/></svg><span>录音回收站</span></button>
+              <div class="team-meeting-filter-group" id="team-meeting-filters" hidden>
+                <label class="team-meeting-filter"><span>来源</span><select id="team-meeting-source" aria-label="团队会议来源"><option value="all">全部来源</option><option value="企业共享">企业共享</option><option value="网页录音">网页录音</option><option value="录音卡">录音卡</option><option value="移动端同步">移动端同步</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label>
+                <label class="team-meeting-filter"><span>部门</span><select id="team-meeting-department" aria-label="团队会议部门"><option value="all">全部部门</option><option value="华东二部">华东二部</option><option value="华北四部">华北四部</option><option value="销售管理部">销售管理部</option><option value="研发部">研发部</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label>
+                <label class="team-meeting-filter team-meeting-creator-filter"><span>创建人</span><input id="team-meeting-creator" type="search" aria-label="搜索创建人" placeholder="搜索创建人" /></label>
+                <label class="team-meeting-filter team-meeting-date-filter"><span>录音时间</span><input id="team-meeting-date" type="date" aria-label="选择录音日期" /></label>
+              </div>
             </div>
             <div class="home-meeting-toolbar" id="thought-toolbar" hidden><label class="meeting-search"><svg class="icon"><use href="#ico-search"/></svg><input id="thought-file-search" type="search" placeholder="搜索月度文件" aria-label="搜索闪念月度文件" /></label><label class="meeting-source-filter meeting-date-filter"><span class="sr-only">筛选归档月份</span><svg class="icon date-icon"><use href="#ico-clock"/></svg><select id="thought-month-select" aria-label="筛选归档月份"><option value="all">全部月份</option><option value="2026-09">2026 年 9 月</option><option value="2026-08">2026 年 8 月</option><option value="2026-07">2026 年 7 月</option></select><svg class="icon"><use href="#ico-chevron"/></svg></label></div>
           </div>
@@ -3964,6 +3970,17 @@
     xiaozhiInput.addEventListener("input", updateXiaozhiComposer);
     $$('[data-xiaozhi-prompt]').forEach((button) => button.addEventListener("click", () => { xiaozhiInput.value = button.dataset.xiaozhiPrompt; xiaozhiInput.focus(); updateXiaozhiComposer(); }));
     xiaozhiSend.addEventListener("click", () => { showToast("小智正在结合所选资料处理"); xiaozhiInput.value = ""; updateXiaozhiComposer(); });
+    const meetingMetadata = {
+      "三季度产品复盘会议": { creator: "张伟", department: "销售管理部", date: "2026-09-02" },
+      "百销产品能力与市场匹配调研": { creator: "张伟", department: "销售管理部", date: "2026-09-01" },
+      "百销产品试用开通与标准化讨论": { creator: "张伟", department: "销售管理部", date: "2026-08-25" },
+      "智能工作台工具对接评估": { creator: "张伟", department: "研发部", date: "2026-08-22" },
+      "客户成功服务流程访谈": { creator: "张伟", department: "销售管理部", date: "2026-08-20" },
+      "产品复盘行动项确认会": { creator: "林晓", department: "华东二部", date: "2026-09-02" },
+      "客户需求复盘会": { creator: "王宁", department: "华北四部", date: "2026-09-01" },
+      "区域销售周会": { creator: "李敏", department: "销售管理部", date: "2026-08-28" },
+      "研发项目推进会": { creator: "陈晨", department: "研发部", date: "2026-08-23" },
+    };
     $$(".home-meeting-row", $("#meeting-list")).forEach((row, index) => {
       const replacement = document.createElement("div");
       Array.from(row.attributes).forEach((attribute) => replacement.setAttribute(attribute.name, attribute.value));
@@ -3975,11 +3992,14 @@
       selectCell.className = "meeting-select-cell";
       selectCell.innerHTML = `<input class="meeting-row-select" type="checkbox" aria-label="选择${$(".home-meeting-title strong", replacement)?.textContent.trim() || "会议"}" />`;
       replacement.prepend(selectCell);
-      const creatorNames = { "三季度产品复盘会议": "张伟", "百销产品能力与市场匹配调研": "张伟", "百销产品试用开通与标准化讨论": "张伟", "智能工作台工具对接评估": "张伟", "客户成功服务流程访谈": "张伟", "产品复盘行动项确认会": "林晓", "客户需求复盘会": "王宁", "区域销售周会": "李敏", "研发项目推进会": "陈晨" };
       const title = $(".home-meeting-title strong", replacement)?.textContent.trim() || "会议";
+      const metadata = meetingMetadata[title] || { creator: replacement.dataset.view === "enterprise" ? "团队成员" : "张伟", department: "", date: "" };
+      replacement.dataset.meetingCreator = metadata.creator;
+      replacement.dataset.meetingDepartment = metadata.department;
+      replacement.dataset.recordingDate = metadata.date;
       const creatorCell = document.createElement("span");
       creatorCell.className = "meeting-creator";
-      creatorCell.textContent = creatorNames[title] || (replacement.dataset.view === "enterprise" ? "团队成员" : "张伟");
+      creatorCell.textContent = metadata.creator;
       $(".home-meeting-size", replacement)?.after(creatorCell);
       const previousAction = $("em", replacement);
       if (previousAction) previousAction.outerHTML = '<span class="meeting-row-actions"><button type="button" data-meeting-action="tag">编辑标签</button><button class="meeting-delete" type="button" data-meeting-action="delete" aria-label="删除会议"><svg class="icon"><use href="#ico-trash"/></svg></button></span>';
@@ -4097,16 +4117,19 @@
       enterprise: ["企业会议", "查看企业成员共享的会议内容"]
     };
     const filterMeetings = () => {
-      const keyword = $("#meeting-search").value.trim().toLowerCase();
-      const source = $("#meeting-source-filter").value;
-      const date = $("#meeting-date-filter").value;
+      const teamMeetingMode = activeMeetingView === "enterprise" && document.body.dataset.workspace === "team";
+      const keyword = teamMeetingMode ? $("#team-meeting-creator").value.trim().toLowerCase() : $("#meeting-search").value.trim().toLowerCase();
+      const source = teamMeetingMode ? $("#team-meeting-source").value : $("#meeting-source-filter").value;
+      const department = teamMeetingMode ? $("#team-meeting-department").value : "all";
+      const date = teamMeetingMode ? $("#team-meeting-date").value : $("#meeting-date-filter").value;
       let visibleCount = 0;
       $$(".home-meeting-row", $("#meeting-list")).forEach((row) => {
         const matchesView = row.dataset.view === activeMeetingView;
-        const matchesKeyword = !keyword || row.textContent.toLowerCase().includes(keyword);
+        const matchesKeyword = !keyword || (teamMeetingMode ? row.dataset.meetingCreator.toLowerCase().includes(keyword) : row.textContent.toLowerCase().includes(keyword));
         const matchesSource = source === "all" || row.dataset.source === source;
-        const matchesDate = date === "all" || (date === "today" && row.dataset.date === "today") || (date === "7" && ["today", "7"].includes(row.dataset.date)) || date === "30";
-        row.hidden = !(matchesView && matchesKeyword && matchesSource && matchesDate);
+        const matchesDepartment = department === "all" || row.dataset.meetingDepartment === department;
+        const matchesDate = teamMeetingMode ? (!date || row.dataset.recordingDate === date) : (date === "all" || (date === "today" && row.dataset.date === "today") || (date === "7" && ["today", "7"].includes(row.dataset.date)) || date === "30");
+        row.hidden = !(matchesView && matchesKeyword && matchesSource && matchesDepartment && matchesDate);
         if (!row.hidden) visibleCount += 1;
       });
       $("#meeting-filter-empty").hidden = visibleCount !== 0;
@@ -4115,6 +4138,7 @@
       const thoughtMode = activeMeetingView === "thought";
       const enterpriseMode = activeMeetingView === "enterprise";
       const panoramaMode = enterpriseMode && activeEnterpriseAsset === "panorama";
+      const teamMeetingMode = enterpriseMode && document.body.dataset.workspace === "team" && !panoramaMode;
       $("#enterprise-asset-tabs").hidden = !enterpriseMode;
       $$('[data-enterprise-asset]').forEach((item) => {
         const active = item.dataset.enterpriseAsset === activeEnterpriseAsset;
@@ -4122,6 +4146,8 @@
         if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
       });
       $("#meeting-toolbar").hidden = thoughtMode || panoramaMode;
+      $("#meeting-toolbar").classList.toggle("team-meeting-mode", teamMeetingMode);
+      $("#team-meeting-filters").hidden = !teamMeetingMode;
       $("#thought-toolbar").hidden = !thoughtMode;
       $("#meeting-table-scroll").hidden = thoughtMode || panoramaMode;
       $("#thought-workspace").hidden = !thoughtMode;
@@ -4154,6 +4180,10 @@
       $("#meeting-time-column").textContent = "录音时间";
       $("#meeting-search").placeholder = "搜索会议";
       $("#meeting-source-filter").value = "all";
+      $("#team-meeting-source").value = "all";
+      $("#team-meeting-department").value = "all";
+      $("#team-meeting-creator").value = "";
+      $("#team-meeting-date").value = "";
       if (!thoughtMode) { $("#thought-preview").hidden = true; activeThoughtFile = null; }
       setXiaozhiExpanded(false);
       syncEnterpriseAssetView();
@@ -4161,6 +4191,10 @@
     $("#meeting-search").addEventListener("input", filterMeetings);
     $("#meeting-source-filter").addEventListener("change", filterMeetings);
     $("#meeting-date-filter").addEventListener("change", filterMeetings);
+    $("#team-meeting-source").addEventListener("change", filterMeetings);
+    $("#team-meeting-department").addEventListener("change", filterMeetings);
+    $("#team-meeting-creator").addEventListener("input", filterMeetings);
+    $("#team-meeting-date").addEventListener("change", filterMeetings);
     $$('[data-toast]').forEach((button) => button.addEventListener("click", () => showToast(button.dataset.toast)));
     $("#empty-start-recording").addEventListener("click", startRecording);
     const previewEmptyMeetings = new URLSearchParams(window.location.search).get("empty") === "1";
@@ -4253,6 +4287,23 @@
         html[data-app-data-hidden="true"] body .team-app-data-content,
         html[data-app-data-hidden="true"] body .team-app-data-head,
         html[data-app-data-hidden="true"] body .team-app-data-list { display:none !important; }
+        .home-meeting-toolbar.team-meeting-mode { display:block !important; width:100% !important; }
+        .home-meeting-toolbar.team-meeting-mode > .meeting-search,
+        .home-meeting-toolbar.team-meeting-mode > .meeting-source-filter,
+        .home-meeting-toolbar.team-meeting-mode > .recording-recycle-entry { display:none !important; }
+        .team-meeting-filter-group { display:grid; grid-template-columns:minmax(170px,.82fr) minmax(220px,1.28fr) minmax(240px,1.14fr) minmax(210px,1fr); gap:18px; width:100%; }
+        .team-meeting-filter-group[hidden] { display:none !important; }
+        .team-meeting-filter { position:relative; display:grid; min-width:0; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:10px; color:#303946; font-size:12px; line-height:20px; }
+        .team-meeting-filter > span { white-space:nowrap; }
+        .team-meeting-filter > select,
+        .team-meeting-filter > input { width:100%; height:38px; min-width:0; padding:0 34px 0 12px; border:1px solid #d9dee8; border-radius:9px; outline:0; color:#596579; background:#fff; font:12px/38px inherit; }
+        .team-meeting-filter > input::placeholder { color:#9aa3b1; }
+        .team-meeting-filter > select { appearance:none; cursor:pointer; }
+        .team-meeting-filter > input:focus,
+        .team-meeting-filter > select:focus { border-color:#8eb5ff; box-shadow:0 0 0 3px rgba(68,125,239,.1); }
+        .team-meeting-filter > .icon { position:absolute; right:12px; width:13px; height:13px; color:#8994a4; pointer-events:none; }
+        .team-meeting-date-filter > input { padding-right:10px; }
+        .team-meeting-creator-filter > input { padding-right:12px; }
         .knowledge-group, .capability-hub, #download-top, .home-desktop-guide,
         #knowledge-tool, #skill-tool, #mcp-tool, #site-tool,
         .recording-assistant-knowledge, #recording-assistant-knowledge, #history-shared-download,
