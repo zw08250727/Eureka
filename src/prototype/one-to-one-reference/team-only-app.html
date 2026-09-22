@@ -249,9 +249,9 @@
     .app-download-entry:hover .app-qr-popover, .app-download-entry:focus-within .app-qr-popover, .app-download-entry.open .app-qr-popover { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
     .app-qr-popover > strong { display: block; color: #252d3a; font-size: 15px; line-height: 21px; }
     .app-qr-popover > span { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 18px; }
-    .app-qr-grid { display: grid; gap: 10px; margin-top: 13px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .app-qr-item { display: flex; min-width: 0; align-items: center; flex-direction: column; padding: 10px 8px 9px; border: 1px solid #e6e9ee; border-radius: 10px; background: #fff; text-align: center; }
-    .app-qr-item img { display: block; width: 104px; height: 104px; max-width: 100%; object-fit: contain; image-rendering: pixelated; }
+    .app-qr-grid { display: flex; justify-content: center; margin-top: 13px; }
+    .app-qr-item { display: flex; width: 182px; min-width: 0; align-items: center; flex-direction: column; padding: 12px 10px 10px; border: 1px solid #e6e9ee; border-radius: 10px; background: #fff; text-align: center; }
+    .app-qr-item img { display: block; width: 144px; height: 144px; max-width: 100%; object-fit: contain; image-rendering: pixelated; }
     .app-qr-item strong { display: block; margin-top: 8px; color: #303846; font-size: 12px; font-weight: 600; line-height: 18px; white-space: nowrap; }
     .app-qr-item span { display: block; margin-top: 1px; color: #8b94a1; font-size: 10px; line-height: 15px; white-space: nowrap; }
     .online-btn, .primary-btn, .secondary-btn { display: inline-flex; height: 40px; align-items: center; justify-content: center; gap: 7px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; }
@@ -2804,7 +2804,7 @@
     <main class="main">
       <div class="topbar"><div class="topbar-inner">
         <div class="page-crumb" id="page-crumb">企业AI工作台</div>
-        <div class="topbar-right"><button class="record-promo" id="hardware-top-promo" aria-label="了解百智录音卡"><span class="promo-device"><img src="assets/hardware-entry.png" alt="百智录音卡" /></span><span class="promo-copy"><strong>百智录音卡</strong><span>录音即文档，开口即交付</span></span></button><div class="top-actions"><button class="points-entry" id="points-top" aria-label="积分余额 2000"><span class="top-action-icon points-action-icon"><svg class="icon"><use href="#ico-spark"/></svg></span><span>积分余额：<strong>2000</strong></span></button><div class="app-download-entry" id="app-download-entry"><button class="app-download-btn" id="app-download-btn" aria-label="下载百智手机应用" aria-haspopup="dialog" aria-expanded="false"><svg class="icon"><use href="#ico-phone"/></svg></button><div class="app-qr-popover" role="dialog" aria-label="百智手机应用下载二维码"><strong>下载百智手机应用</strong><span>选择手机系统后扫码下载</span><div class="app-qr-grid"><div class="app-qr-item"><img src="assets/download/app-store-qr.png" alt="App Store 下载二维码" /><strong>App Store</strong><span>iPhone / iPad</span></div><div class="app-qr-item"><img src="assets/download/android-qr.png" alt="Android 下载二维码" /><strong>Android</strong><span>安卓手机</span></div><div class="app-qr-item"><img src="assets/download/harmony-qr.png" alt="Harmony 下载二维码" /><strong>Harmony</strong><span>鸿蒙设备</span></div></div></div></div><button class="bell-btn" aria-label="通知"><svg class="icon"><use href="#ico-bell"/></svg></button><button class="primary-btn top-action-text" id="download-top"><span class="top-action-icon download-action-icon"><svg class="icon"><use href="#ico-desktop"/></svg></span>下载桌面端</button></div></div>
+        <div class="topbar-right"><button class="record-promo" id="hardware-top-promo" aria-label="了解百智录音卡"><span class="promo-device"><img src="assets/hardware-entry.png" alt="百智录音卡" /></span><span class="promo-copy"><strong>百智录音卡</strong><span>录音即文档，开口即交付</span></span></button><div class="top-actions"><button class="points-entry" id="points-top" aria-label="积分余额 2000"><span class="top-action-icon points-action-icon"><svg class="icon"><use href="#ico-spark"/></svg></span><span>积分余额：<strong>2000</strong></span></button><div class="app-download-entry" id="app-download-entry"><button class="app-download-btn" id="app-download-btn" aria-label="下载 EurekaMind App" aria-haspopup="dialog" aria-expanded="false"><svg class="icon"><use href="#ico-phone"/></svg></button><div class="app-qr-popover" role="dialog" aria-label="EurekaMind App 下载二维码"><strong>EurekaMind App</strong><span>扫码安装 App，绑定你的录音设备</span><div class="app-qr-grid"><div class="app-qr-item"><img src="assets/download/eurekamind-app-qr.png" alt="EurekaMind App 下载二维码" /><strong>扫码下载</strong><span>App Store</span></div></div></div></div><button class="bell-btn" aria-label="通知"><svg class="icon"><use href="#ico-bell"/></svg></button><button class="primary-btn top-action-text" id="download-top"><span class="top-action-icon download-action-icon"><svg class="icon"><use href="#ico-desktop"/></svg></span>下载桌面端</button></div></div>
       </div></div>
       <div class="main-inner" data-main-view="home">
       <section class="recording-home" aria-label="录音工作首页">
@@ -4533,14 +4533,13 @@
       if (title) title.textContent = "EurekaMind App";
       const subtitle = popover.querySelector(":scope > span");
       if (subtitle) subtitle.textContent = "扫码安装 App，绑定你的录音设备";
-      popover.querySelectorAll(".app-qr-item").forEach((item) => {
-        const image = item.querySelector("img");
-        if (image) { image.src = "assets/download/eurekamind-app-qr.png"; image.alt = "EurekaMind App 下载二维码"; }
-        const label = item.querySelector("strong");
-        if (label) label.textContent = "扫码下载";
-        const note = item.querySelector("span");
-        if (note) note.textContent = "iOS / Android";
-      });
+      const item = popover.querySelector(".app-qr-item");
+      const image = item?.querySelector("img");
+      if (image) { image.src = "assets/download/eurekamind-app-qr.png"; image.alt = "EurekaMind App 下载二维码"; }
+      const label = item?.querySelector("strong");
+      if (label) label.textContent = "扫码下载";
+      const note = item?.querySelector("span");
+      if (note) note.textContent = "App Store";
       if (!popover.querySelector(".appstore-download-link")) {
         const link = document.createElement("a");
         link.className = "appstore-download-link";
