@@ -26,6 +26,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>百智 AI 工作台 · v14 轻团队 Agent Workspace</title>
+  <script>
+    (() => {
+      if (new URLSearchParams(window.location.search).get("workspace") === "team") {
+        document.documentElement.dataset.teamWorkspaceBoot = "1";
+      }
+    })();
+  </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23171717'/%3E%3Cpath d='M10 8h7.5a5 5 0 0 1 0 10H10V8Zm0 10h9a4 4 0 0 1 0 8h-9v-8Z' fill='white'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -2068,6 +2075,7 @@
       .home-desktop-guide-actions { justify-content: flex-start; }
     }
     /* v13 · 企业版 / 个人版双模式 */
+    html[data-team-workspace-boot="1"] .edition-gate { display: none !important; }
     .edition-gate { position: fixed; inset: 0; z-index: 40; display: grid; overflow: auto; padding: 44px 24px; place-items: center; background: radial-gradient(circle at 18% 15%, rgba(85,104,255,.1), transparent 32%), radial-gradient(circle at 84% 80%, rgba(130,58,255,.09), transparent 34%), #f5f7fb; }
     .edition-gate[hidden] { display: none !important; }
     .edition-gate-panel { width: min(820px, 100%); padding: 34px; border: 1px solid #dfe4ec; border-radius: 22px; background: rgba(255,255,255,.94); box-shadow: 0 28px 70px rgba(34,49,81,.16); backdrop-filter: blur(18px); }
@@ -3803,7 +3811,8 @@
         item.setAttribute("aria-selected", String(active));
       });
       $$(".history-row", $("#history-task-list")).forEach((row) => { row.hidden = filter !== "all" && row.dataset.historyType !== filter; });
-      $("#history-shared-guide").hidden = filter !== "shared";
+      const sharedGuide = $("#history-shared-guide");
+      if (sharedGuide) sharedGuide.hidden = filter !== "shared";
       $("#history-task-list").setAttribute("aria-labelledby", tab.id);
     }));
     $$(".history-row").forEach((row) => row.addEventListener("click", () => showToast(`正在打开项目「${$(".history-text", row).textContent}」`)));
@@ -4211,20 +4220,25 @@
     $("#send-button").addEventListener("click", sendTask);
     $("#composer").addEventListener("input", () => { $("#send-button").disabled = !$("#composer").value.trim(); });
     $("#composer").addEventListener("keydown", (event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendTask(); } });
-    const setEdition = (edition) => {
-      if (ArtifactUI.guard(() => setEdition(edition))) return;
+    const setEdition = (edition, { silent = false } = {}) => {
+      if (ArtifactUI.guard(() => setEdition(edition, { silent }))) return;
       const personal = edition === "personal";
       document.body.dataset.edition = personal ? "personal" : "enterprise";
       Array.from($("#meeting-source-filter").options).forEach((option) => { if (option.value === "企业共享") { option.hidden = personal; option.disabled = personal; } });
-      $("#edition-gate").hidden = true;
+      const editionGate = $("#edition-gate");
+      if (editionGate) editionGate.hidden = true;
       mainViewTitles.home = personal ? "我的 AI 工作台" : "企业AI工作台";
-      $("#user-edition-label").textContent = personal ? "个人版" : "企业版";
-      $("#page-crumb").textContent = mainViewTitles.home;
-      $("#history-tab-all").click();
-      $('[data-meeting-view="my"]').click();
+      const editionLabel = $("#user-edition-label");
+      if (editionLabel) editionLabel.textContent = personal ? "个人版" : "企业版";
+      const pageCrumb = $("#page-crumb");
+      if (pageCrumb) pageCrumb.textContent = mainViewTitles.home;
+      const historyTab = $("#history-tab-all");
+      if (historyTab) historyTab.click();
+      const myMeetingTab = $('[data-meeting-view="my"]');
+      if (myMeetingTab) myMeetingTab.click();
       showMainView("home", { silent: true });
       setXiaozhiExpanded(false);
-      showToast(personal ? "已进入个人版" : "已进入企业版");
+      if (!silent) showToast(personal ? "已进入个人版" : "已进入企业版");
     };
     $$('[data-edition-choice]').forEach((button) => button.addEventListener("click", () => {
       const edition = button.dataset.editionChoice;
@@ -4485,12 +4499,10 @@
       };
       window.openUserSettings = openUserSettings;
       document.querySelector("#user-menu")?.addEventListener("click", (event) => { const item = event.target.closest('[data-profile-action="settings"]'); if (!item) return; event.preventDefault(); event.stopImmediatePropagation(); closeUserMenu(); openUserSettings(); }, true);
-      const enterpriseChoice = document.querySelector('[data-edition-choice="enterprise"]');
-      if (enterpriseChoice) enterpriseChoice.click();
+      if (new URLSearchParams(window.location.search).get("workspace") === "team") {
+        root.removeAttribute("data-team-workspace-boot");
+      }
       document.querySelector("#enterprise-invite-card")?.remove();
-      document.querySelector("#edition-gate")?.setAttribute("hidden", "true");
-      document.body.dataset.workspace = "team";
-      if (window.TeamWorkspace?.setWorkspace) window.TeamWorkspace.setWorkspace("team", window.TeamWorkspace.getActiveTeam()?.id);
       const quick = document.querySelector(".sidebar-quick-nav");
       const moveRoot = (node, label) => {
         if (!node || !quick) return;

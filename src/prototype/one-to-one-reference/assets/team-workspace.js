@@ -1711,7 +1711,7 @@
     const teamUpgrade = params.get("teamUpgrade");
     if (workspace === "team" || teamPage || share) {
       ensureDemoTeam();
-      if (typeof setEdition === "function") setEdition("personal");
+      if (typeof setEdition === "function") setEdition("personal", { silent: true });
       setTeamWorkspace("team", teamState.activeTeamId);
     } else if (params.get("edition") === "personal") {
       document.body.dataset.workspace = "personal";
