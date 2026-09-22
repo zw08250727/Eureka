@@ -4385,6 +4385,7 @@
       moveRoot(document.querySelector(".apps-nav"), "应用数据");
       moveRoot(document.querySelector("[data-contacts-entry]"), "联系人");
       moveRoot(document.querySelector("#recycle-bin-entry"), "回收站");
+      document.querySelector(".sidebar-quick-nav > .knowledge-tree-leaf-row.team-only-root-entry > .tree-folder-more")?.remove();
       const recycleNavLabel = document.querySelector("#recycle-bin-entry span");
       if (recycleNavLabel) recycleNavLabel.textContent = "回收站";
       document.querySelector(".knowledge-group")?.remove();
