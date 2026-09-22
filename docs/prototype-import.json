@@ -1,0 +1,173 @@
+{
+  "importedAt": "2026-09-22",
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "301192ec4a38aac66c3b0628aa10a1d8359541e04976cdb8eb2523d3b9ec7170"
+    },
+    {
+      "path": "auth-shell.html",
+      "sha256": "1d382be6aa68d7457e90628d1daefc5b3737badbc6e0edb5308ed9810e89cc52"
+    },
+    {
+      "path": "team-only.html",
+      "sha256": "54ea65f6a7c29da8ff0fc242537073cbd5836b36cc17c0b8aaf6f29203c10cbb"
+    },
+    {
+      "path": "assets/auth-aqua-clear.css",
+      "sha256": "f2ecbf8f5398084f2f15de4560ce3fc6744347f65f854a3e097bbbf191682cfd"
+    },
+    {
+      "path": "one-to-one-reference/team-only-app.html",
+      "sha256": "ee5b9c943f1e2bee98f26b56ebb2bfda28b4aaf21a332ea72dab0817d033d3d8"
+    },
+    {
+      "path": "one-to-one-reference/agent.html",
+      "sha256": "c0328985b9fb0e7fe0edef251f6726b9d1ba1998952becbe10a4b631f12c47c6"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-grid-tools.js",
+      "sha256": "1bdb133087446f9fc20d14f729556ffd83e2ba3878fffe10c284194e93e9fcc5"
+    },
+    {
+      "path": "one-to-one-reference/assets/contacts-ui.js",
+      "sha256": "29b3c46ffa3d277c6ffb50eaf646de32695552714f0cd708c66b0e776dc89acd"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-data-ui.js",
+      "sha256": "247b7845ff2d8e2de6cf31af975b83753b9327d799cb1411055479e431ef2b37"
+    },
+    {
+      "path": "one-to-one-reference/assets/aqua-clear-theme.css",
+      "sha256": "51b3f44b1bb2d7480b2b7e82b7d3e5230de62bd7f93fc40a9b65f465a4be2aea"
+    },
+    {
+      "path": "one-to-one-reference/assets/hardware-entry.png",
+      "sha256": "d8af08a17cd11cb2e8276622d09f53830365533140e8b102f2e63cce5d171e21"
+    },
+    {
+      "path": "one-to-one-reference/assets/monochrome-theme.css",
+      "sha256": "bd75974d9342b6f17f1b0881eb67ca8568bea7176a27b35faf8a962e5db994e1"
+    },
+    {
+      "path": "one-to-one-reference/assets/team-workspace.css",
+      "sha256": "917565b044d4509aff731575681cb9aae8ff3b253e281d2616ba16362a7413e1"
+    },
+    {
+      "path": "one-to-one-reference/assets/knowledge-file-actions.js",
+      "sha256": "39190740d4c96d751bfed503a7dec6077b8f286fff7933781433ac9eabb18867"
+    },
+    {
+      "path": "one-to-one-reference/assets/agent-artifacts-model.js",
+      "sha256": "7bcc0bd2a0e0d6a76f4ef888a403a4923da5fa3e1328793bb6ce06dba4e11201"
+    },
+    {
+      "path": "one-to-one-reference/assets/recycle-bin-model.js",
+      "sha256": "470a3c8592942551b7320ff9c129c7e68355f5fe4463c64cfb75394f547ef4e7"
+    },
+    {
+      "path": "one-to-one-reference/assets/agent-artifacts.css",
+      "sha256": "280d0ed92ec704297c44866dbfbac1f8af9332cf5971a4238fc543e26cf1de7c"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-data-model.js",
+      "sha256": "9b3148d90a495a11b7b6ac948d1f81b19caedfca4a4a79325d603c26e46c19f0"
+    },
+    {
+      "path": "one-to-one-reference/assets/contacts-model.js",
+      "sha256": "314a218f5be47cc3aa15c0495497b249641601c59e0ed653c5f62ee2e68fa072"
+    },
+    {
+      "path": "one-to-one-reference/assets/contacts.css",
+      "sha256": "66fcb032702bf720c5987bf5fc7104c75753503824d3502bfeb599ce8b1d0710"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-table-export.js",
+      "sha256": "1d9ecc98e1405ab9015c0b2f32833149b2e665fec41069f42a3dad5379886fe9"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-data-editor.css",
+      "sha256": "8e2001f1416c4ebd256cccb409b2c316f641cd397461208088aba6c55e8b18ee"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-data-editor.js",
+      "sha256": "afeb166c63d974b30413991c1cd73703dee2c8421836f50295ef87df70d89cc6"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-field-values.js",
+      "sha256": "4d75169d09dfe822acdcf6343dc6cacaa7d0e6a1ef5363e3d7702d95d29ac661"
+    },
+    {
+      "path": "one-to-one-reference/assets/agent-artifacts-results.js",
+      "sha256": "b1ba04d4212e8375887fb1520d13631a6bf2be9cbdd2adf599ba5dc3745ef844"
+    },
+    {
+      "path": "one-to-one-reference/assets/apps-data.css",
+      "sha256": "cffe1bf4e8c4fdd4bb2c3ffe104f92949863b5e06ed8f57352f042d96f872e9b"
+    },
+    {
+      "path": "one-to-one-reference/assets/agent-artifacts-ui.js",
+      "sha256": "e500bf2ec58564d37ff66ac803f2eb55657015416781c395fbcf8fbcc128475f"
+    },
+    {
+      "path": "one-to-one-reference/assets/team-workspace.js",
+      "sha256": "9eefe6fa039b1039fb37518cfb7e1020493142415ad2f3ec166bff719c42498c"
+    },
+    {
+      "path": "one-to-one-reference/assets/download/android-qr.png",
+      "sha256": "60ae42650fadce2cbfbf120a11c4762660ef6c9d6105d68cae7dd3fb7d1247b1"
+    },
+    {
+      "path": "one-to-one-reference/assets/download/eurekamind-app-qr.png",
+      "sha256": "685135052d8a9e19e6ccb7fc8592b7af2edeebc5c7947f589ac95d63ef025d46"
+    },
+    {
+      "path": "one-to-one-reference/assets/download/app-store-qr.png",
+      "sha256": "0a43058d3285ac5ebac2d0404d96515f4995a23f2ca12f5de7721c97d88fa6a4"
+    },
+    {
+      "path": "one-to-one-reference/assets/download/harmony-qr.png",
+      "sha256": "9099dc54a3fbc3ca353ba7bc7a91467342cc9705bda7ab417f0f308c0640bb05"
+    },
+    {
+      "path": "one-to-one-reference/assets/experts/market-analysis-expert.png",
+      "sha256": "12f0f15dbb7757f22fe34f469a17188a209e447cdfe39de108f1090f005c868d"
+    },
+    {
+      "path": "one-to-one-reference/assets/experts/general-agent.png",
+      "sha256": "fc119609cfba272a463b0a4d60e618f9de327641d3a4b087046e01649657591c"
+    },
+    {
+      "path": "one-to-one-reference/assets/experts/business-insight-expert.png",
+      "sha256": "50f9c9ef0a3164b1f99e8c5d0dd2ebae61fba037ea14031185ba4f4333c45a30"
+    },
+    {
+      "path": "one-to-one-reference/assets/experts/report-writing-expert.png",
+      "sha256": "52f7de41b66bfbfa3aafc19f50b3d0fd34e569314e46b8f706a8cc9c48917141"
+    },
+    {
+      "path": "one-to-one-reference/assets/desktop-guide/desktop-launch-screen-cropped.png",
+      "sha256": "faa9f7b05b9311c4f673f4dd89bf8e08b48187e6405cf26052eadf1978e7796a"
+    },
+    {
+      "path": "one-to-one-reference/tests/contacts-model.cjs",
+      "sha256": "e6285ffee29636189c7a212db593d3c113232fe1011dd450e4f6752e97ea7d52"
+    },
+    {
+      "path": "one-to-one-reference/tests/apps-grid-tools.cjs",
+      "sha256": "47db23c2abc38d5cd5c7f0b6753e1bfc4cdf27b7b17f6a468600b2d6f8e3e32a"
+    },
+    {
+      "path": "one-to-one-reference/tests/apps-editing.cjs",
+      "sha256": "aa376df44eb62dd078c1e7be96a66b8718f6547d77ed7f10c7508ccc6af66cfd"
+    },
+    {
+      "path": "one-to-one-reference/tests/apps-data-permissions.cjs",
+      "sha256": "f6d0fda4d56189b657def1b8d650ad110c7923ac165a908d217391067a395def"
+    },
+    {
+      "path": "one-to-one-reference/tests/apps-table-export.test.cjs",
+      "sha256": "cbe90847cedd4599e3ba7ff819ed72a8e875c126d24121ba9dfbcb7e1891766e"
+    }
+  ]
+}
